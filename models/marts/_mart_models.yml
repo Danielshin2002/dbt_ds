@@ -1,0 +1,206 @@
+version: 2
+
+models:
+  - name: fct_product_funnel
+    description: >
+      SKU-to-SKU next-purchase funnel mart showing what customers buy in their
+      next order after buying each product.
+    columns:
+      - name: previous_product_sku
+        description: SKU purchased in the earlier order.
+        tests:
+          - not_null
+      - name: previous_product_name
+        description: Product name for the earlier SKU.
+      - name: previous_product_type
+        description: Product type for the earlier SKU.
+      - name: next_product_sku
+        description: SKU purchased in the customer's next order.
+        tests:
+          - not_null
+      - name: next_product_name
+        description: Product name for the next SKU.
+      - name: next_product_type
+        description: Product type for the next SKU.
+      - name: transition_count
+        description: Number of observed previous-product to next-product transitions.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "> 0"
+      - name: customer_count
+        description: Number of unique customers represented by the transition.
+      - name: avg_days_between_orders
+        description: Average number of days between the previous and next orders.
+      - name: pct_of_previous_product_next_purchases
+        description: >
+          Share of next-product transitions for this next SKU among all observed
+          next purchases after the same previous SKU.
+
+  - name: fct_store_product_performance
+    description: >
+      Store and product performance mart showing units sold, revenue, supply
+      cost, gross profit, margin, and popularity rank for observed store sales.
+    columns:
+      - name: store_id
+        description: Unique identifier for the observed store.
+        tests:
+          - not_null
+      - name: store_name
+        description: Name of the observed store.
+        tests:
+          - not_null
+      - name: tax_rate
+        description: Store tax rate used to calculate tax-adjusted customer price.
+        tests:
+          - not_null
+      - name: sku
+        description: Product SKU sold at the store.
+        tests:
+          - not_null
+      - name: product_name
+        description: Product name for the SKU.
+        tests:
+          - not_null
+      - name: units_sold
+        description: Number of item rows sold for this product at the store.
+        tests:
+          - not_null
+      - name: revenue
+        description: Total product revenue before tax.
+        tests:
+          - not_null
+      - name: gross_profit
+        description: Total product gross profit before tax.
+        tests:
+          - not_null
+      - name: gross_margin_percentage
+        description: Gross profit divided by product revenue.
+        tests:
+          - not_null
+      - name: avg_tax_adjusted_customer_price
+        description: Average unit customer price after applying the store tax rate.
+      - name: product_popularity_rank
+        description: Product rank within the store by units sold and gross profit.
+
+  - name: fct_store_product_pair_recommendations
+    description: >
+      Top three observed-store product pair recommendations by promotion type,
+      combining product popularity, gross profit, margin, tax-adjusted customer
+      price, and funnel strength.
+    columns:
+      - name: store_id
+        description: Unique identifier for the observed store.
+        tests:
+          - not_null
+      - name: store_name
+        description: Name of the observed store.
+        tests:
+          - not_null
+      - name: previous_product_sku
+        description: First product SKU in the recommended pair.
+        tests:
+          - not_null
+      - name: previous_product_name
+        description: First product name in the recommended pair.
+        tests:
+          - not_null
+      - name: next_product_sku
+        description: Next-order product SKU in the recommended pair.
+        tests:
+          - not_null
+      - name: next_product_name
+        description: Next-order product name in the recommended pair.
+        tests:
+          - not_null
+      - name: promotion_pair_type
+        description: >
+          Promotion bucket for the recommendation: food/beverage cross-type,
+          beverage/beverage, or jaffle/jaffle.
+        tests:
+          - not_null
+      - name: transition_count
+        description: Number of observed funnel transitions for the product pair.
+        tests:
+          - not_null
+      - name: previous_product_gross_profit
+        description: Store-level gross profit for the first product.
+        tests:
+          - not_null
+      - name: previous_product_gross_margin_percentage
+        description: Store-level gross margin percentage for the first product.
+        tests:
+          - not_null
+      - name: next_product_gross_profit
+        description: Store-level gross profit for the next product.
+        tests:
+          - not_null
+      - name: next_product_gross_margin_percentage
+        description: Store-level gross margin percentage for the next product.
+        tests:
+          - not_null
+      - name: recommendation_score
+        description: Weighted normalized score used to rank recommended product pairs.
+        tests:
+          - not_null
+      - name: recommendation_rank
+        description: Product pair recommendation rank within each observed store.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "between 1 and 3"
+
+  - name: fct_store_supply_distribution
+    description: >
+      Estimated current perishable supply distribution by observed store, based
+      on sold products and the supplies required by each SKU. Also flags
+      perishable supplies used by the current recommended product pairs.
+    columns:
+      - name: store_id
+        description: Unique identifier for the observed store.
+        tests:
+          - not_null
+      - name: store_name
+        description: Name of the observed store.
+        tests:
+          - not_null
+      - name: supply_id
+        description: Supply identifier.
+        tests:
+          - not_null
+      - name: supply_name
+        description: Supply name.
+        tests:
+          - not_null
+      - name: is_perishable
+        description: Whether the supply is perishable.
+      - name: estimated_supply_units_used
+        description: Estimated units of this supply used by sold products.
+        tests:
+          - not_null
+      - name: estimated_supply_cost
+        description: Estimated cost of this supply used by sold products.
+        tests:
+          - not_null
+      - name: pct_of_store_supply_units
+        description: Share of store perishable supply units represented by this supply.
+      - name: pct_of_store_supply_cost
+        description: Share of store perishable supply cost represented by this supply.
+      - name: current_product_count_using_supply
+        description: Number of currently sold products that use this supply.
+      - name: current_products_using_supply
+        description: Names of currently sold products that use this supply.
+      - name: recommended_product_count_using_supply
+        description: Number of recommended products that use this supply.
+      - name: recommended_products_using_supply
+        description: Names of recommended products that use this supply.
+      - name: recommended_promotion_pair_types
+        description: Promotion pair types that include products using this supply.
+      - name: is_used_by_recommended_products
+        description: Whether this supply supports any currently recommended product.
+      - name: store_supply_usage_rank
+        description: Rank of this supply within the store by estimated usage and cost.
+        tests:
+          - not_null

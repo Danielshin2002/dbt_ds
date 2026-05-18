@@ -1,0 +1,21 @@
+store_name,supply_name,is_perishable,estimated_supply_units_used,pct_of_store_supply_units,recommended_products_using_supply,recommended_promotion_pair_types
+Philadelphia,16oz compostable clear cup,false,805,0.14481021766504767,"for richer or pourover , tangaroo, vanilla ice","bev_bev_pairing, food_bev_pairing"
+Philadelphia,16oz compostable clear lid,false,805,0.14481021766504767,"for richer or pourover , tangaroo, vanilla ice","bev_bev_pairing, food_bev_pairing"
+Philadelphia,biodegradable straw,false,805,0.14481021766504767,"for richer or pourover , tangaroo, vanilla ice","bev_bev_pairing, food_bev_pairing"
+Philadelphia,coffee,true,328,0.05900341788091383,"for richer or pourover , vanilla ice","bev_bev_pairing, food_bev_pairing"
+Philadelphia,compostable cutlery - knife,false,192,0.034538586076632488,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,cutlery - fork,false,192,0.034538586076632488,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,serving boat,false,192,0.034538586076632488,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,napkin,false,192,0.034538586076632488,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,bread,true,192,0.034538586076632488,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,french vanilla syrup,true,160,0.028782155063860407,vanilla ice,bev_bev_pairing
+Philadelphia,cheese,true,155,0.02788271271811477,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,mango,true,154,0.027702824248965641,tangaroo,bev_bev_pairing
+Philadelphia,tangerine,true,154,0.027702824248965641,tangaroo,bev_bev_pairing
+Philadelphia,lamb and pork bratwurst,true,43,0.0077352041734124839,the krautback,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,house-pickled cabbage sauerkraut,true,43,0.0077352041734124839,the krautback,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,mustard,true,43,0.0077352041734124839,the krautback,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,pulled pork,true,39,0.0070156502968159737,flame impala,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,pineapple,true,39,0.0070156502968159737,flame impala,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,ghost pepper sauce,true,39,0.0070156502968159737,flame impala,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,beef stew,true,37,0.0066558733585177186,doctor stew,"food_bev_pairing, jaffle_jaffle_pairing"

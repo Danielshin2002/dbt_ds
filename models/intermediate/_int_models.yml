@@ -1,0 +1,145 @@
+version: 2
+
+models:
+  - name: int_product_funnel_transitions
+    description: >
+      Customer product transition model that pairs every product in a customer's
+      order with every product in that customer's next chronological order.
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer who made both orders.
+        tests:
+          - not_null
+      - name: previous_order_id
+        description: Order identifier for the earlier order in the transition.
+        tests:
+          - not_null
+      - name: next_order_id
+        description: Order identifier for the customer's next chronological order.
+        tests:
+          - not_null
+      - name: previous_ordered_at
+        description: Timestamp when the earlier order was placed.
+      - name: next_ordered_at
+        description: Timestamp when the next order was placed.
+      - name: days_between_orders
+        description: Number of days between the previous order and next order.
+      - name: previous_product_sku
+        description: SKU purchased in the previous order.
+        tests:
+          - not_null
+      - name: previous_product_name
+        description: Product name for the previous SKU.
+      - name: previous_product_type
+        description: Product type for the previous SKU.
+      - name: next_product_sku
+        description: SKU purchased in the customer's next order.
+        tests:
+          - not_null
+      - name: next_product_name
+        description: Product name for the next SKU.
+      - name: next_product_type
+        description: Product type for the next SKU.
+
+  - name: int_sales_enriched
+    description: >
+      Item-grain sales model enriched with store, product, supply cost, margin,
+      and tax-adjusted customer price fields.
+    columns:
+      - name: store_id
+        description: Unique identifier for the store where the item was sold.
+        tests:
+          - not_null
+      - name: store_name
+        description: Store name where the item was sold.
+        tests:
+          - not_null
+      - name: tax_rate
+        description: Store tax rate applied to customer checkout price.
+        tests:
+          - not_null
+      - name: order_id
+        description: Order identifier containing the sold item.
+        tests:
+          - not_null
+      - name: customer_id
+        description: Customer identifier for the order.
+        tests:
+          - not_null
+      - name: item_id
+        description: Unique identifier for the sold item row.
+        tests:
+          - not_null
+      - name: sku
+        description: Product SKU sold in the order.
+        tests:
+          - not_null
+      - name: product_name
+        description: Name of the sold product.
+        tests:
+          - not_null
+      - name: product_price
+        description: Unit price for the sold product.
+        tests:
+          - not_null
+      - name: total_supply_cost
+        description: Sum of all supply costs associated with the product SKU.
+        tests:
+          - not_null
+      - name: gross_profit
+        description: Unit product price minus total supply cost.
+        tests:
+          - not_null
+      - name: gross_margin_percentage
+        description: Gross profit divided by unit product price.
+        tests:
+          - not_null
+      - name: tax_adjusted_customer_price
+        description: Product price multiplied by one plus the store tax rate.
+        tests:
+          - not_null
+      - name: sold_unit_count
+        description: Unit counter for item-grain sales rows.
+
+  - name: int_store_supply_usage
+    description: >
+      Estimated item-to-supply usage model. Each sold item is joined to the
+      supplies required by its product SKU, so each row represents one estimated
+      unit of one supply used for one sold item.
+    columns:
+      - name: store_id
+        description: Unique identifier for the observed store.
+        tests:
+          - not_null
+      - name: store_name
+        description: Name of the observed store.
+        tests:
+          - not_null
+      - name: item_id
+        description: Sold item identifier.
+        tests:
+          - not_null
+      - name: sku
+        description: Product SKU that consumed the supply.
+        tests:
+          - not_null
+      - name: product_name
+        description: Product name that consumed the supply.
+      - name: supply_id
+        description: Supply identifier consumed by the sold product.
+        tests:
+          - not_null
+      - name: supply_name
+        description: Supply name consumed by the sold product.
+        tests:
+          - not_null
+      - name: is_perishable
+        description: Whether the supply is perishable.
+      - name: supply_cost
+        description: Unit cost of the supply.
+        tests:
+          - not_null
+      - name: estimated_supply_unit_count
+        description: Unit counter for the estimated supply usage row.
+        tests:
+          - not_null

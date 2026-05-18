@@ -7,10 +7,10 @@ with source as (
 renamed as (
 
     select
-        id,
-        name,
-        opened_at,
-        tax_rate
+        id as store_id,
+        name as store_name,
+        timestamp(opened_at) as opened_at,
+        cast(tax_rate as numeric) as tax_rate 
 
     from source
 

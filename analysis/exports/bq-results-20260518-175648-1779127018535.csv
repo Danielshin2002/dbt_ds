@@ -1,0 +1,14 @@
+store_name,supply_name,is_perishable,estimated_supply_units_used,pct_of_store_supply_units,recommended_products_using_supply,recommended_promotion_pair_types
+Philadelphia,coffee,true,328,0.13804713804713806,"for richer or pourover , vanilla ice","bev_bev_pairing, food_bev_pairing"
+Philadelphia,bread,true,192,0.080808080808080815,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,french vanilla syrup,true,160,0.067340067340067339,vanilla ice,bev_bev_pairing
+Philadelphia,cheese,true,155,0.06523569023569023,"doctor stew, flame impala, the krautback","food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,mango,true,154,0.064814814814814811,tangaroo,bev_bev_pairing
+Philadelphia,tangerine,true,154,0.064814814814814811,tangaroo,bev_bev_pairing
+Philadelphia,lamb and pork bratwurst,true,43,0.0180976430976431,the krautback,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,house-pickled cabbage sauerkraut,true,43,0.0180976430976431,the krautback,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,mustard,true,43,0.0180976430976431,the krautback,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,pulled pork,true,39,0.016414141414141416,flame impala,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,pineapple,true,39,0.016414141414141416,flame impala,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,ghost pepper sauce,true,39,0.016414141414141416,flame impala,"food_bev_pairing, jaffle_jaffle_pairing"
+Philadelphia,beef stew,true,37,0.015572390572390573,doctor stew,"food_bev_pairing, jaffle_jaffle_pairing"
